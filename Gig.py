@@ -69,13 +69,15 @@ def convert():
         if amount < 0:
             result_label.config(text="Ошибка: нельзя конвертировать отрицательные числа!")
 
-        url = f"https://api.frankfurter.app/latest?from={before}"
+        API_KEY = "cur_live_tjYFiBLBAr5QalMdtbZ8wiMJgUd1RJiqmhWl9LL5"
+
+        url = f"https://api.currencyapi.com/v3/latest?apikey={API_KEY}&base_currncy={before}&currencies={after}"
 
         response = requests.get(url)
 
         data = response.json()
 
-        rate = data["rates"][after]
+        rate = data["data"][after]["value"]
 
         result = amount * rate
 
